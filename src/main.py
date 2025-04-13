@@ -2,10 +2,13 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    counter = ft.Text("0", size=50, data=0)
+    init_number = page.client_storage.get("number.setting") or 0
+
+    counter = ft.Text(str(init_number), size=50, data=init_number)
 
     def increment_click(e):
         counter.data += 1
+        page.client_storage.set("number.setting", counter.data)
         counter.value = str(counter.data)
         counter.update()
 

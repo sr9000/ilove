@@ -2,7 +2,7 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: help init-venv init-poetry install-requirements run web clean
+.PHONY: help venv poetry poetry-export pip-freeze requirements run web black
 
 help:  ## Show this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -13,6 +13,12 @@ venv:  ## Create a virtual environment
 poetry:  ## Set up Poetry environment
 	poetry install
 
+poetry-export: ## Export Poetry dependencies to requirements.txt
+	poetry export -f requirements.txt --output requirements.txt --without-hashes
+
+pip-freeze: ## Export pip dependencies to requirements.txt
+	pip freeze > requirements.txt
+
 requirements:  ## Install requirements.txt using pip
 	pip install -r requirements.txt
 
@@ -21,3 +27,6 @@ run:  ## Run desktop application
 
 web:  ## Run the application in browser
 	flet run --web
+
+black:  ## Run black code formatter on src
+	black src
