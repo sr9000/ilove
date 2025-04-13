@@ -27,7 +27,7 @@ def _new_button(
 
 
 def show_warning(
-    page, msg: str, buttons: list[str | tuple[str, EventCallback]]
+    page: ft.Page, msg: str, buttons: list[str | tuple[str, EventCallback]]
 ) -> None:
     def close_banner(_: ft.ControlEvent):
         page.close(banner)

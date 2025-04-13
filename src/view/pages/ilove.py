@@ -24,7 +24,7 @@ def init(page: ft.Page):
                     icon=ft.Icons.EVENT_NOTE,
                     content=ft.Text("This is logs"),
                 ),
-                tabs.tasks(),
+                tabs.tasks(page),
             ],
             on_click=lambda e: (
                 e.control.on_click() if isinstance(e.control, ClickableTab) else None
