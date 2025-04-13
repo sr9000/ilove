@@ -2,7 +2,7 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: help venv poetry poetry-export pip-freeze requirements run web black
+.PHONY: help venv poetry poetry-export pip-freeze requirements run web format
 
 help:  ## Show this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -26,7 +26,11 @@ run:  ## Run desktop application
 	flet run
 
 web:  ## Run the application in browser
-	flet run --web
+	flet run --web --port 8000
 
-black:  ## Run black code formatter on src
+format:  ## Run isort then black code formatters on src
+	@echo -n "\n#1: "
+	isort src
+
+	@echo -n "\n#2: "
 	black src

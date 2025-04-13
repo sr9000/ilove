@@ -1,5 +1,6 @@
-from .base import Base
 from peewee import *
+
+from .base import Base
 
 
 class Task(Base):
